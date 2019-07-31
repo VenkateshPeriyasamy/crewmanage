@@ -1,0 +1,908 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html  xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Crew Management</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <!--Google Fonts link-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="assets/css/iconfont.css">
+        <link rel="stylesheet" href="assets/css/slick/slick.css">
+        <link rel="stylesheet" href="assets/css/slick/slick-theme.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/jquery.fancybox.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
+
+
+        <!--For Plugins external css-->
+        <link rel="stylesheet" href="assets/css/plugins.css" />
+         
+        <!--Theme custom css -->
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!--Theme Responsive css-->
+        <link rel="stylesheet" href="assets/css/responsive.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+		<!-- <link rel="stylesheet" href="assets/css/jquerydatatable.css"> -->
+		<link rel="stylesheet" type="text/css"
+     	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+	    <link rel="stylesheet" href="assets/css/popup.css" />
+		<script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		<style>
+		#main_menu {
+		position:fixed;
+		}
+		
+		#details {
+		padding:100px 0 0;
+		}
+		#details .table {
+		padding:0;
+		background:#f2f2f2;
+		box-shadow:0 5px 5px 0 rgba(167, 179, 167, 0.5);
+		}
+		.table-header {
+			background: #550984;
+			color: #ffffff;
+		}
+		.table-header h4 {
+			padding:10px;
+			}
+		.table-header h3 {
+			padding:7px;
+			}
+			#details table{
+			margin:15px;
+			}
+			
+	body {
+		padding:0;
+		margin:0;
+		overflow-x:hidden;
+		
+		
+	}
+	.demo {
+		box-shadow:0 5px 5px 1px rgba(158, 159, 158, 0.5);
+	}
+	.header {
+		background:rgba(110, 108, 113, 0.71);
+		color:#ffffff;
+	}
+	.header h5 {
+		padding:10px;
+	}
+	.header i {
+		padding:0 5px;
+	}
+	.add-new {
+		float:right;
+	}
+	#add {
+		cursor:pointer;
+		display:block;
+	}
+	.add-new p {
+		margin: 15px auto;
+		padding: 2px 15px;
+		background: #ffffff;
+		border-radius: 3px;
+		color: #550984;
+	}
+	.table-one, .table-two {
+		overflow-x:auto;
+		margin:2% auto;
+		
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		width: 100%;
+		border: 1px solid #ddd;
+	}
+	th, td {
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even){
+		background-color: #f2f2f2
+	}
+	.table-one {
+		
+	}
+	.table-two {
+		position: fixed;
+		z-index: 4;
+		right: -100%;				
+		-moz-transition: .5s all ease-in;
+		-o-transition: .5s all ease-in;
+		-webkit-transition: .5s all ease-in;
+		transition: .5s all ease-in;
+	}
+	.table-two.open {
+		right: 0%;	
+	    position: relative;
+	}
+	form.form{
+	text-align:center;
+	}
+	form input{
+	text-align:center;
+	}
+	h4 i{
+	padding:5px;
+	font-family:sans-serif;
+	}
+	.create {
+		margin:0 auto;
+		display:block;
+		}
+	#btnsave,#cancel {
+	   background:#337ab7;
+    color: #ffffff;
+    padding: 8px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 3px;
+	}
+	  .kt-widget__img:after {
+                  content:"\f044";
+                  }
+                  @media ( min-width : 1025px) .kt-portlet.kt-portlet--height-fluid {
+                  height
+                  :
+                  calc
+                  (100%
+                  -
+                  20
+                  px
+                  );
+                  }
+                  .kt-portlet {
+                  display: flex;
+                  flex-grow: 1;
+                  flex-direction: column;
+                  box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
+                  background-color: #fff;
+                  margin-bottom: 20px;
+                  border-radius: 4px;
+                  margin: 0;
+  				  padding: 0;
+                  }
+                  .kt-portlet .kt-portlet__head.kt-portlet__head--noborder {
+                  border-bottom: 0;
+                  }
+                  .kt-portlet .kt-portlet__head {
+                  transition: height .3s;
+                  }
+                  .kt-portlet .kt-portlet__head {
+                  transition: left .3s, right .3s, height .3s;
+                  }
+                  .kt-portlet .kt-portlet__head {
+                  display: flex;
+                  align-items: stretch;
+                  justify-content: space-between;
+                  position: relative;
+                  padding: 0 25px;
+                  border-bottom: 1px solid #ebedf2;
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
+                  }
+                  .kt-widget.kt-widget--user-profile-2 .kt-widget__head .kt-widget__media .kt-widget__img {
+                  }
+                  img {
+                  vertical-align: middle;
+                  border-style: none;
+                  }
+                  .kt-portlet__head-title{
+                  color:#ffffff;
+                  padding:5px;
+                  }
+                  .kt-widget__contact {
+                  padding : 5px 10px;}
+                  .kt-widget__label{
+                      font-weight: 600;
+                  }
+                  .kt-widget__info{
+                  padding:5px;
+                    font-weight: 600;
+                  
+                  }
+                  .kt-portlet__head {
+                  background:#27769c;
+                  }
+                  .kt-widget__item
+                  {
+                  padding: 17px 0px 0px 30px;
+                  }
+                  .kt-widget__head{
+                  padding: 14px 0px 0px 30px;
+                  }
+                  .kt-avatar .kt-avatar__upload i {
+                  color: #716aca;
+                  font-size: .9rem;
+                  }
+                  .fa, .fas {
+                  font-weight: 900;
+                  }
+                  .fa, .fab, .fal, .far, .fas {
+                  -moz-osx-font-smoothing: grayscale;
+                  -webkit-font-smoothing: antialiased;
+                  display: inline-block;
+                  font-style: normal;
+                  font-variant: normal;
+                  text-rendering: auto;
+                  line-height: 1;
+                  }
+                  .kt-avatar .kt-avatar__upload i {
+                  color: #716aca;
+                  font-size: .9rem;
+                  }
+                  .accordian {
+                    background-color: #550984;
+                    color: #fff;
+                    cursor: pointer;
+                    padding: 10px;
+                    text-align: center;
+                    /* border: none; */
+                    outline: none;
+                    transition: 0.4s;
+                    margin: 5px;
+                    float: right;
+                    border-radius: 5px;
+                    width: 60px;
+                  }
+                  .crewdetails {
+                  
+                    background-color: #27769c;
+                   color: #fff;
+   				   cursor: pointer;
+                   padding: 10px;               
+                   text-align: center;
+                  /*  border: none; */
+                   outline: none;
+                   transition: 0.4s;
+                   margin: 5px;
+                   float: right;
+                   border-radius: 25px;
+                  }
+                    #addcrew  {
+                  
+                    background-color: #27769c;
+                   color: #fff;
+   				   cursor: pointer;
+                   padding: 10px;               
+                   text-align: center;
+                  /*  border: none; */
+                   outline: none;
+                   transition: 0.4s;
+                   margin: 5px;
+                   float: right;
+                   border-radius: 25px;
+                  }
+                  
+                  .panel {
+                  padding: 0 18px;
+                  background-color: white;
+                  display: none;
+                  overflow: hidden;
+                  }
+                  #createcrewform{
+                  margin:0 auto;
+                  }
+                  !imprtant
+                  .radio inupt{
+                  width:15px !important; 
+                  }
+                  .profile-pic {
+                  position: relative;
+                  display: inline-block;
+                  }
+                  .edit {
+                  position: absolute;
+                  right: -85px;
+                  bottom: 13px;
+                  display: block;
+                  }
+                  .edit .fa-pencil {
+                  line-height: 17px;
+                  color: #ffffff;
+                  background: #550984;
+                  text-align: center;
+                  width: 20px;
+                  padding: 3px;
+                  font-weight: 100;
+                  font-size:12px;
+                  }
+                  select{
+                  width: 300px;
+                  border: none;
+                  outline: none;
+                  background: #575e633d;
+                  padding: 10px;
+                  margin: 5px 0 5px 50px;
+                  }
+                  .edit-input{
+                  width: 0!important;
+                  height: 0!important;
+                  overflow: hidden;
+                  opacity: 0;
+                  }
+                  .profile-pic img{
+                  width:120px;
+                  height:120px;
+                  }
+                  .kt-portlet__body{
+                   background-image: url("profile.png") no-repeat center center;
+                   background-size: cover;
+                 }
+                 .arrow-img{
+                     padding: 3px 15px 10px;
+                     }
+                     
+                   .addbutton{  
+                     width: 100px;
+    /* border: none; */
+    border-radius: 25px;
+    outline: none;
+    background: #690867;
+    padding: 10px;
+    color: white;
+    margin: 5px 106px 10px 146px;
+    }
+    #overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  
+}
+
+#popup {
+  max-width: 600px;
+  width: 80%;
+  max-height: 400px;
+  height: 80%;
+  padding: 20px;
+  position: relative;
+  background: #fff;
+  margin: 20px auto;
+  top:20%;
+  border-radius:10px;
+}
+
+#close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #000;
+}
+.label-text{
+   text-align: start;
+    color: #ffffff;
+    font-size: 14px;
+
+}
+		</style>
+		
+    </head>
+    <body data-spy="scroll" data-target=".navbar-collapse">
+
+        <div class='preloader'><div class='loaded'>&nbsp;</div></div>
+            <div class="top-header">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-9 header-left">
+                    <ul>
+                       <li><i class="fa fa-phone"></i>+91 9876543210</li>
+                       <li><i class="fa fa-envelope"></i>priyanka.orgware@gmail.com</li>
+                    </ul>
+                 </div>
+                 <div class="col-md3 header-right">
+                    <ul>
+                     
+                       <li><i class="fa fa-sign-in"></i>Logout</li>
+                    </ul>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <header class="menu-header" id="myHeader">
+                 <div class="container">
+                    <div class="row">
+                      <div class="nav admin">
+                      	<div class="col-md-5 logo">
+                      		<a href=""><h4>Crew Management</h4></a>
+                      	</div>
+                      	<div class="col-md-7 menu">
+                      		<ul>
+                      			<li><a href="/index">Home</a></li>
+                                 <li><a href="/index">About</a></li>
+                                 <li><a href="/flightmaster">Flight Master</a></li>                                 
+                                 <li><a href="/crewmaster">Crew Master</a></li>
+                                 <li><a href="/routemaster">Route Master</a></li>
+                                 <li><a href="/tripmaster">TRIP Master</a></li>
+                      		</ul>
+                      	</div>
+                      </div>
+                    </div>
+                 </div>
+           </header>
+           
+		
+				
+			<div id="details">
+				<div class="container">
+				<div class="row">
+				
+					<div class="col-md-12 table">
+						<div class="table-header">
+							 <h4><!--<i id="back" class="fa fa-long-arrow-left arrow"></i>-->Trip Master</h4> 
+						</div>
+						<div class="col-md-12 table-one">
+						<div id="add" class="add-new">
+							<p>Add New</p>
+						</div>
+								<table id="leavemaster" class="display">
+									   
+                                 <th:block >
+                                    <div class="col-md-12 kt-portlet kt-portlet--height-fluid">
+                                       <div class="kt-portlet__head kt-portlet__head--noborder">
+                                          <div class="kt-portlet__head-label">
+                                             <h3 class="kt-portlet__head-title">
+                                             <span class="kt-widget__label">Trip ID No:</span>
+                                             </h3>
+                                          </div>
+                                       </div>
+                                       <div class="kt-portlet__body">
+                                          <!--begin::Widget -->
+                                          <div class="kt-widget kt-widget--user-profile-2">
+                                             
+                                             <div class="kt-widget__body">
+                                                
+                                                <div class="kt-widget__item col-md-12">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-2">
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3"></span> <a href="#"
+                                                         class="kt-widget__data ">Airline</a>
+                                                   </div>
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3 "></span> <span
+                                                         class="kt-widget__data ">Model NO</span>
+                                                   </div>
+                                                   </div>
+                                                      <div class="col-md-2">
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3"></span> <span
+                                                         class="kt-widget__data">Departure time</span>
+                                                   </div>
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3"></span> <span
+                                                         class="kt-widget__data">Arrival location</span>
+                                                   </div>
+                                                   </div>
+                                                   <div class="col-md-2">
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3"></span> <span
+                                                         class="kt-widget__data">Duration</span>
+                                                          
+                                                   </div>
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3">
+                                                      <img class="arrow-img" src="assets/images/arrow3.png"></span> <span class="kt-widget__data"></span>
+                                                   </div>
+                                                   </div>
+                                                    <div class="col-md-2">
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3">
+                                                      </span> <span class="kt-widget__data">Arrival time</span>
+                                                   </div>
+                                                   <div class="kt-widget__contact">
+                                                      <span class="kt-widget__label col-md-3"></span> <span
+                                                         class="kt-widget__data"> Arrival location</span>
+                                                   </div>
+                                                 
+                                                   </div>
+                                                  <div class="col-md-2">
+                                                  <button class="crewdetails" type=button>Crew Details</button>
+                                                  </div>
+                                                <div class="col-md-1">
+                                              
+                                                  </div>
+                                                   
+                                                   
+                                                </div>
+                                                <button class="accordian" type=button>Edit</button>
+                                             </div>
+                                             
+                                             <div class="panel">
+                                               <!--  <form action="#" id="editcrewform" th:action="@{/crewmasterupdate}" th:object="${crew}" method="post">
+                                                
+                                                   <div class="block">
+                                                      <label class="name">ID No:</label> <input type="text" id="memberid"
+                                                         name="memberid"   th:value="${crewrecord.memberid}" ><span></span>
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Name:</label> <input type="text"
+                                                         id="crewname" name="crewname" th:value="${crewrecord.name}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">DOB:</label> <input type="text" id="dob"
+                                                         name="dateofbirth" th:value="${crewrecord.dob}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Designation:</label>
+                                                      <select th:field="*{designation}" name="designation">
+                                                         <option th:value="'select'" th:field="*{designation}" >Select</option>
+                                                         <option th:value="'Pilot'" th:field="*{designation}" >Pilot</option>
+                                                         <option th:value="'Flight Engineer'" th:field="*{designation}" >Flight Engineer</option>
+                                                         <option th:value="'Radio Operator'" th:field="*{designation}" >Radio Operator</option>
+                                                         <option th:value="'Flight Attendant'" th:field="*{designation}" >Flight Attendant</option>
+                                                         <option th:value="'Flight Medic'" th:field="*{designation}" >Flight Medic</option>
+                                                         <option th:value="'Load Master'" th:field="*{designation}">Load Master</option>
+                                                         <option th:value="'Mechanics'" th:field="*{designation}" >Mechanics</option>
+                                                      </select>
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Date of Joining:</label> <input type="text"
+                                                         id="dateofjoin" name="dateofjoining" th:value="${crewrecord.doj}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Email:</label> <input type="email" id="mail"
+                                                         name="mail" th:value="${crewrecord.email}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Contact No:</label> <input type="text"
+                                                         id="mobno" name="mobno" th:value="${crewrecord.mobno}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Gender:</label>
+                                                      <select th:field="*{gender}">
+                                                         <option th:value="'select'" th:field="*{gender}" name=select >Select</option>
+                                                         <option th:value="'Male'" th:field="*{gender}" th:text="Male" name="male"></option>
+                                                         <option th:value="'Female'" th:field="*{gender}" th:text="Female"></option>
+                                                      </select>
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Qualification:</label> <input
+                                                         type="text" id="edu" name="edu" th:field="*{edu}">
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Experience:</label>
+                                                      <select th:field="*{exp}" name="exp">
+                                                         <option th:value="'select'" th:field="*{exp}" >Select</option>
+                                                         <option th:value="'1 Year'" th:field="*{exp}" >1 Year</option>
+                                                         <option th:value="'2 Year'" th:field="*{exp}" >2 Year</option>
+                                                         <option th:value="'3 Year'" th:field="*{exp}" >3 Year</option>
+                                                         <option th:value="'4 Year'" th:field="*{exp}" >4 Year</option>
+                                                         <option th:value="'5 Year'" th:field="*{exp}" >5 Year</option>
+                                                         <option th:value="'6 Year'" th:field="*{exp}" >6 Year</option>
+                                                         <option th:value="'7 Year'" th:field="*{exp}" >7 Year</option>
+                                                         <option th:value="'8 Year'" th:field="*{exp}" >8 Year</option>
+                                                         <option th:value="'9 Year'" th:field="*{exp}" >9 Year</option>
+                                                         <option th:value="'10 Year'" th:field="*{exp}" >10 Year</option>
+                                                         <option th:value="'11 Year'" th:field="*{exp}" >11 Year</option>
+                                                         <option th:value="'12 Year'" th:field="*{exp}" >12 Year</option>
+                                                         <option th:value="'13 Year'" th:field="*{exp}" >13 Year</option>
+                                                         <option th:value="'14 Year'" th:field="*{exp}" >14 Year</option>
+                                                         <option th:value="'15 Year'" th:field="*{exp}" >15 Year</option>
+                                                         <option th:value="'16 Year'" th:field="*{exp}" >16 Year</option>
+                                                         <option th:value="'17 Year'" th:field="*{exp}" >17 Year</option>
+                                                         <option th:value="'18 Year'" th:field="*{exp}" >18 Year</option>
+                                                         <option th:value="'19 Year'" th:field="*{exp}" >19 Year</option>
+                                                         <option th:value="'20 Year'" th:field="*{exp}" >20 Year</option>
+                                                         <option th:value="'21 Year'" th:field="*{exp}" >21 Year</option>
+                                                         <option th:value="'22 Year'" th:field="*{exp}" >22 Year</option>
+                                                      </select>
+                                                   </div>
+                                                   <div class="block">
+                                                      <label class="name">Location:</label> <input type="text"
+                                                         id="location" name="location" th:value="${crewrecord.location}">
+                                                   </div>
+                                                   <div class="col-md-12 create">
+                                                      <input type="submit" id="editbtnsave" value="Create">
+                                                      <input type="reset" id="editcancel" value="Cancel">
+                                                   </div>
+                                                </form> -->
+                                             </div>
+                                          </div>
+                                          <!--end::Widget -->
+                                       </div>
+                                    </div>
+                                    <!--custom code ends here  -->
+                                 </th:block>
+                             
+								</table>
+								
+							</div>
+							<div class="col-md-12 table-two">
+							<!-- <input type="submit"  class="col-md-4 loginbtn btn" id="btnsave" value="Create"> -->
+							<!-- <input type="submit"  class="col-md-4 loginbtn btn" id="btnsave" value="Cancel">	 -->
+							<!-- <form class="" id="createuser" method="post"> -->
+							<!-- <label class="name">Flight No:</label> -->
+							<!-- <input type="text" id="emp_id" name="employee-id"> -->
+							<!-- <label class="name">Aircraft Type:</label> -->
+							<!-- <input type="text" id="first_name" name="firstname"> -->
+							<!-- </form> -->
+							
+								
+                               
+							<form class="form " id="createuser" method="post">						  
+						   
+						       
+						            <div class="block" >
+						                <label class="name">Trip No:</label>
+						                <input type="text" id="emp_id" name="employee-id">
+						            </div>				                    
+						            <div class="block">						         
+						                <label class="name">Route:</label>
+						                <input type="text" id="first_name" name="firstname">
+						            </div><div class="block">						         
+						                <label class="name">Date:</label>
+						                <input type="text" id="first_name" name="firstname">
+						            </div>
+									<div class="block">						         
+						                <label class="name">Flight No:</label>
+						                <input type="text" id="first_name" name="firstname">
+						            </div>
+									<div class="block">						         
+						                <label class="name">Departure:</label>
+						                <input type="text" id="first_name" name="firstname">
+						            </div>
+									<div class="block">						         
+						                <label class="name">Arrival:</label>
+						                <input type="text" id="first_name" name="firstname">
+						            </div>
+									<div class="block ">						         
+						                <label class="name " >Crew Details:</label>
+					
+						               <!--  <input class="col-md-6" type="button" id="addcrew" value="+ Add" style="align:left"> -->
+						      <button class="addbutton edit-button">+ Add</button>
+						           	 </div>
+									<div class="col-md-12 create">									
+						           <input type="submit" id="btnsave" value="Create">	
+						          <input type="button"  id="cancel" value="Cancel">
+						      		</div>
+									
+						      							 
+						  	</form>
+						    </div>
+						    <div id="overlay" class="edit">	
+		<div id="popup">
+		<div id="close"></div>
+         <form  action="#" class="form"  id="useredit" method="post">	
+         	<div id="edit-table">
+         	<div class="block" >
+                      <label class="Id">Flight Id:</label>
+                      <input type="text" id="id"  name="Id" readonly="readonly">
+                      
+                  </div>					  					       
+                  <div class="block" >
+                      <label class="flightno">Flight No:</label>
+                      <input type="text" id="flightNo"  name="flightNo" >
+                      <!-- <span th:if="${#fields.hasErrors('flightNo')}"  th:style="'color:#FF0000;'" th:errors="*{flightNo}"></span> -->
+                  </div>				                    
+                  <div class="block">						         
+                      <label class="name">Aircraft Type:</label>
+                      <input type="text"  id="flightType" name="flightType">
+                     <!--  <span th:if="${#fields.hasErrors('flightType')}"  th:style="'color:#FF0000;'" th:errors="*{flightType}"></span> -->
+                  </div>
+                  <div class="block">						                 
+                  	<label class="airline">Airline:</label>
+                      <input type="text"  name="airline" id="airline">
+                     <!--  <span th:if="${#fields.hasErrors('airline')}"  th:style="'color:#FF0000;'" th:errors="*{airline}"></span> -->
+                  </div>
+                  <div class="block">
+                      <label class="model">Model:</label>
+                       <input type="text"  name="flightModelNo" id="flightModelNo">
+<!--                        <span th:if="${#fields.hasErrors('flightModelNo')}"  th:style="'color:#FF0000;'" th:errors="*{flightModelNo}"></span>
+ -->                  </div>
+                  <div class="block">
+                     	<label class="capacity">Capacity:</label>
+                      <input type="text"   name="flightCapacity"  id="flightCapacity">
+<!--                       <span th:if="${#fields.hasErrors('flightCapacity')}"  th:style="'color:#FF0000;'" th:errors="*{flightCapacity}"></span>
+ -->                  </div>	
+         <div class="col-md-12 create">									
+                  	<input type="submit" id="btnsave" value="Create">
+                  	<input type="button" id="canceledit" value="Cancel">	
+                
+            		</div>
+            		</div>						      							 
+         	</form>
+         	</div>
+         </div>
+							</div>
+							</div>
+							</div>
+							 <section class="footer">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="main_footer">
+                                 <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                       <div class="flowus">
+                                          <a href=""><i class="fa fa-facebook"></i></a>
+                                          <a href=""><i class="fa fa-twitter"></i></a>
+                                          <a href=""><i class="fa fa-google-plus"></i></a>
+                                          <a href=""><i class="fa fa-instagram"></i></a>
+                                          <a href=""><i class="fa fa-youtube"></i></a>
+                                          <a href=""><i class="fa fa-dribbble"></i></a>
+                                       </div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12">
+                                       <div class="copyright_text">
+                                          <p class=" wow fadeInRight" data-wow-duration="1s">© Copyright <a rel="nofollow" href="http://orgware.in/">ORGware</a>. All right reserved.</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </section>
+				</div>			
+
+        <!-- START SCROLL TO TOP  -->
+
+        <div class="scrollup">
+            <a href="#"><i class="fa fa-chevron-up"></i></a>
+        </div>
+		
+        <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+
+        <script src="assets/js/jquery.magnific-popup.js"></script>
+        <script src="assets/js/jquery.mixitup.min.js"></script>
+        <script src="assets/js/jquery.easing.1.3.js"></script>
+        <script src="assets/js/jquery.masonry.min.js"></script>
+
+        <!--slick slide js -->
+        <script src="assets/css/slick/slick.js"></script>
+        <script src="assets/css/slick/slick.min.js"></script>
+
+
+        <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/main.js"></script>
+		<script>
+		$(document).ready(function(){
+			$("#add").click(function(){
+				$(".table-two").addClass("open");
+				$(".table-one").hide();
+			});
+			$("#cancel").click(function(){
+				$(".table-two").removeClass("open");
+				$(".table-one").show(1100);
+				
+			});
+			$('.edit-button').on('click',function(event){   
+				 event.preventDefault();
+	        $('.edit').modal();
+	        $(".table-two").removeClass("open");
+			$(".table-one").show(1100);
+
+
+
+	    });
+	    
+	    $('#canceledit').on('click',function(){	        
+	        $('.edit').modal('hide');
+	        $(".table-two").addClass("open");
+			$(".table-one").hide();
+	        });
+		});
+	</script>
+	    <script>
+                  var acc = document.getElementsByClassName("accordion");
+                  var i;
+                  
+                  for (i = 0; i < acc.length; i++) {
+                    acc[i].addEventListener("click", function() {
+                      this.classList.toggle("active");
+                      var panel = this.nextElementSibling;
+                      if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                      } else {
+                        panel.style.display = "block";
+                      }
+                    });
+                  }
+                  
+                  function readURL(input) {
+                	  if (input.files && input.files[0]) {
+                	    var reader = new FileReader();
+                	    
+                	    reader.onload = function(e) {
+                	      $('#blah').attr('src', e.target.result);
+                	    }
+                	    
+                	    reader.readAsDataURL(input.files[0]);
+                	  }
+                	}
+               </script>
+               <!-- <script>
+                  $(document)
+                  		.ready(
+                  				function() {
+                  					$("#add")
+                  							.click(
+                  									function() {
+                  
+                  										$("#createcrewform")
+                  												.find(
+                  														"input[type=text], textarea")
+                  												.val("");
+                  										document.getElementById("dob").value = "";
+                  										document.getElementById("dateofjoin").value = "";
+                  										document.getElementById("mail").value = "";
+                  										document.getElementById("exp").value="";
+                  										
+                  										$(".table-two")
+                  												.addClass("open");
+                  									 $(".table-one").hide(); 
+                  
+                  									});
+                  					 $("#cancel").click(function() {
+                  						$(".table-two").removeClass("open");
+                  						$(".table-one").show(1100);
+                  						$(".arrow").hide();
+                  					}); 
+                  				});
+                  $("#fileread").change(function() {
+                	  readURL(this);
+                	});
+               </script> -->
+               <script>
+				window.onscroll = function() {myFunction()};
+				
+				var header = document.getElementById("myHeader");
+				var sticky = header.offsetTop;
+				
+				function myFunction() {
+				  if (window.pageYOffset > sticky) {
+				    header.classList.add("sticky");
+				  } else {
+				    header.classList.remove("sticky");
+				  }
+				}
+				</script>
+               <script>
+                  $(document).ready(function () {
+                      $("#dob,#dateofjoin").datepicker({
+                          format:'yyyy-mm-dd',
+                          autoclose:true,
+                  		showTodayButton: false,
+                          showClear: true,
+                  		todayHighlight: true,    
+                  });
+                  
+                  });
+                 
+                  
+                  
+               </script>
+   
+
+    </body>
+</html>
