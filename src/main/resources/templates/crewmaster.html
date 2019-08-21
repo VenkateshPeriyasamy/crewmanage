@@ -154,9 +154,9 @@
                   form.form {
                   text-align: center;
                   }
-                  form input {
+                  /* form input {
                   text-align: center;
-                  }
+                  } */
                   h4 i {
                   padding: 5px;
                   font-family: sans-serif;
@@ -350,7 +350,7 @@
                  <div class="col-md-9 header-left">
                     <ul>
                        <li><i class="fa fa-phone"></i>+91 9876543210</li>
-                       <li><i class="fa fa-envelope"></i>priyanka.orgware@gmail.com</li>
+                       <li><i class="fa fa-envelope"></i>orgwareairlines@gmail.com</li>
                     </ul>
                  </div>
                  <div class="col-md3 header-right">
@@ -505,13 +505,15 @@
                                                 
                                                 <div class="profile-pic">
 														<img th:attr="src=@{'/images/' + ${crewrecord.filename}}"
-															class="blah"> <label class="edit"> <i
-															class="fa fa-pencil fa-lg"></i><input type="file"
+															class="blah">
+															 <!-- <label class="edit">
+															  <i
+										                   					class="fa fa-pencil fa-lg"></i><input type="file"
 															class="edit-input fileread" id="attachment" name="profilepic">
-														</label>
+														</label> -->
 													</div>
                                                 
-                                                   <div class="block">
+                                                      <div class="block">
                                                       <label class="name">ID No:</label> <input type="text" id="memberid"
                                                          name="memberid"   th:value="${crewrecord.memberid}" ><span></span>
                                                    </div>
@@ -525,8 +527,7 @@
                                                    </div>
                                                    <div class="block">
                                                       <label class="name">Designation:</label>
-                                                      <select th:field="*{designation}" name="designation">
-                                                         <option th:value="'select'" th:field="*{designation}" >Select</option>
+                                                      <select th:field="*{designation}" name="designation" th:value=" m">
                                                          <option th:value="'Pilot'" th:field="*{designation}" >Pilot</option>
                                                          <option th:value="'Flight Engineer'" th:field="*{designation}" >Flight Engineer</option>
                                                          <option th:value="'Radio Operator'" th:field="*{designation}" >Radio Operator</option>
@@ -550,8 +551,7 @@
                                                    </div>
                                                    <div class="block">
                                                       <label class="name">Gender:</label>
-                                                      <select th:field="*{gender}">
-                                                         <option th:value="'select'" th:field="*{gender}" name=select >Select</option>
+                                                      <select th:field="*{gender}" th:value="${crewrecord.gender}">
                                                          <option th:value="'Male'" th:field="*{gender}" th:text="Male" name="male"></option>
                                                          <option th:value="'Female'" th:field="*{gender}" th:text="Female"></option>
                                                       </select>
@@ -562,8 +562,7 @@
                                                    </div>
                                                    <div class="block">
                                                       <label class="name">Experience:</label>
-                                                      <select th:field="*{exp}" name="exp">
-                                                         <option th:value="'select'" th:field="*{exp}" >Select</option>
+                                                      <select th:field="*{exp}" name="exp"  th:value="${crewrecord.exp}">
                                                          <option th:value="'1 Year'" th:field="*{exp}" >1 Year</option>
                                                          <option th:value="'2 Year'" th:field="*{exp}" >2 Year</option>
                                                          <option th:value="'3 Year'" th:field="*{exp}" >3 Year</option>
@@ -624,13 +623,13 @@
                               <form action="#" id="createcrewform"
                                  th:action="@{/crewmastersave}" th:object="${crew}" method="post"  enctype="multipart/form-data">
                                  
-                                 <!-- <div class="profile-pic">
-														<img th:attr="src=@{'/images/' + ${crewrecord.filename}}"
+                                  <div class="profile-pic">
+														<img
 															class="blah"> <label class="edit"> <i
 															class="fa fa-pencil fa-lg"></i><input type="file"
 															class="edit-input fileread" id="attachment" name="profilepic">
 														</label>
-													</div> -->
+													</div> 
                                  <div class="block">
                                     <label class="name">ID No:</label> <input type="text" id="memberid"
                                        name="memberid" th:field="*{memberid}">
@@ -670,7 +669,7 @@
                                  <div class="block">
                                     <label class="name">Designation:</label>
                                     <select th:field="*{designation}" id="designation ">
-                                       <option th:value="'select'" th:field="*{designation}" >Select</option>
+                                       <option th:value="''"  >Select</option>
                                        <option th:value="'Pilot'" th:field="*{designation}" >Pilot</option>
                                        <option th:value="'Flight Engineer'" th:field="*{designation}" >Flight Engineer</option>
                                        <option th:value="'Radio Operator'" th:field="*{designation}" >Radio Operator</option>
@@ -791,7 +790,11 @@
                <script src="assets/js/main.js"></script>
                <script src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-               <script>
+
+
+<script>
+               
+               
                   var acc = document.getElementsByClassName("accordion");
                   var i;
                   
@@ -844,21 +847,23 @@
                <script>
                
                function readURL(input) {
-             	  if (input.files && input.files[0]) {
-             	    var reader = new FileReader();
-             	    
-             	    reader.onload = function(e) {
-             	      $('#blah').attr('src', e.target.result);
-             	    }
-             	    
-             	    reader.readAsDataURL(input.files[0]);
-             	  }
-             	}
+       			if (input.lastElementChild.files && input.lastElementChild.files[0]) {
+       				var reader = new FileReader();
+       				debugger;
+       				reader.onload = function(e) {
+       					input.previousElementSibling.setAttribute('src',
+       							e.target.result);
+       				}
+       				reader.readAsDataURL(input.lastElementChild.files[0]);
+       			}
+       		}
+
                
                
-               $("#fileread").change(function() {
-             	  readURL(this);
-             	});
+               
+               
+             
+              
                   $(document).ready(function () {
                       $("#dob,#dateofjoin").datepicker({
                           format:'yyyy-mm-dd',
@@ -867,6 +872,10 @@
                           showClear: true,
                   		todayHighlight: true,    
                   });
+                      
+                      $(".edit").change(function() {
+                     	  readURL(this);
+                     	});
                   
                   });
                   

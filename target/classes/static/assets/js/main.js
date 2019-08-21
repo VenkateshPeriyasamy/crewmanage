@@ -1,5 +1,6 @@
 "use strict";
 jQuery(document).ready(function ($) {
+	
 
     $(window).load(function () {
         $(".loaded").fadeOut();
@@ -146,6 +147,18 @@ jQuery(document).ready(function ($) {
     //End
 
 });
+
+
+function formonload(){
+	if($("#temp").val()=="show"){
+	$('.edit').modal();
+					$(".table-two").removeClass("open");
+					$(".table-one").show(1100)
+
+	}}
+
+
+
 
 
 

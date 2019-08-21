@@ -29,7 +29,7 @@ public class FlightDetailsController {
     FlightDetailsRepo flightrepo;
     
     @Autowired
-    private FlightDetailsService service;
+      FlightDetailsService service;
     
     
     @RequestMapping(value="/flightmaster",method=RequestMethod.GET)

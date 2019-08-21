@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Table
 @Entity
-public class CrewDetails {
+public class CrewDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -213,6 +213,14 @@ public class CrewDetails {
 
 	public void setMemberid(String memberid) {
 		this.memberid = memberid;
+	}
+
+	@Override
+	public String toString() {
+		return "CrewDetails [id=" + id + ", memberid=" + memberid + ", name=" + name + ", gender=" + gender + ", dob="
+				+ dob + ", email=" + email + ", designation=" + designation + ", doj=" + doj + ", location=" + location
+				+ ", mobno=" + mobno + ", edu=" + edu + ", exp=" + exp
+				+ ", filename=" + filename + ", tripdetails=" + tripdetails + "]";
 	}
 
 	

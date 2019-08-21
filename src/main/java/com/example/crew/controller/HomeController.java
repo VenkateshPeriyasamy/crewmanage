@@ -1,4 +1,4 @@
-package com.example.crew.controller;
+  package com.example.crew.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +21,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,10 +49,11 @@ public class HomeController {
 	String filepath;
 
 	@GetMapping("/index")
-	public String home() {
+	public String home(Authentication auth) {
+		System.out.println(auth.getName());
 		return ("index");
 	}
-
+ 
 	@RequestMapping("/adminhomepage")
 	public String adminhomepage() {
 		return ("adminhomepage");
@@ -84,38 +86,12 @@ public class HomeController {
 		});
 		model.addAttribute("page", page);
 
-		// System.out.println(crews);
+		// System.out.println(crews); 
 
 		return "crewmaster";
 	}
-
-	@RequestMapping(value = { "/crewmastersave" }, method = { RequestMethod.POST, RequestMethod.GET })
-	public String productSave(Model model, @PageableDefault(size = 3) Pageable pageable,
-
-			@ModelAttribute("crew") @Validated CrewDetails crew, BindingResult result,@RequestParam(value = "profilepic") MultipartFile file,
-			final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
-		
-		CrewDetails crewedit = new CrewDetails();
-
-		if (crew != null) {
-			
-			if (file != null) {
-				File tFile = multipartToFile(file);
-
-				String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-				crewedit.setFilename(timeStamp + "_" + tFile.getName());
-				crewedit.setImage(readContentIntoByteArray(tFile));
-			}
-			 crewrepo.save(crewedit);
-		}
-			
-			System.out.println(crew.getDob());
-			crewrepo.save(crew);
-		
-		Page<CrewDetails> page = crewrepo.findAll(pageable);
-		model.addAttribute("page", page);
-		return "crewmaster";
-	}
+	
+	
 
 
 	public File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException {
@@ -129,7 +105,7 @@ public class HomeController {
 	private static byte[] readContentIntoByteArray(File file) {
 		FileInputStream fileInputStream = null;
 		byte[] bFile = new byte[(int) file.length()];
-		try {
+		try {	 
 			// convert file into array of bytes
 			fileInputStream = new FileInputStream(file);
 			fileInputStream.read(bFile);
@@ -139,9 +115,34 @@ public class HomeController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		return bFile;
 	}
+
+	@RequestMapping(value = { "/crewmastersave" }, method = { RequestMethod.POST, RequestMethod.GET })
+	public String productSave(Model model, @PageableDefault(size = 3) Pageable pageable,
+
+			@ModelAttribute("crew") @Validated CrewDetails crew, BindingResult result,@RequestParam(value = "profilepic") MultipartFile file,
+			final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
+		
+
+		if (crew != null) {
+			
+			if (file != null) {
+				File tFile = multipartToFile(file);
+
+				String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+				crew.setFilename(timeStamp + "_" + tFile.getName());
+				crew.setImage(readContentIntoByteArray(tFile));
+			}
+			 crewrepo.save(crew);
+		}
+					
+		Page<CrewDetails> page = crewrepo.findAll(pageable);
+		model.addAttribute("page", page);
+		return "redirect:/crewmaster";
+	}
+
 
 	@RequestMapping(value = { "/crewmasterupdate" }, method = { RequestMethod.POST,
 			RequestMethod.GET }, consumes = "multipart/form-data")
@@ -167,7 +168,12 @@ public class HomeController {
 			crewedit.setMobno(request.getParameter("mobno"));
 			crewedit.setEdu(request.getParameter("edu"));
 			crewedit.setExp(request.getParameter("exp"));
-			if (file != null) {
+			System.out.println(file.getName().split(Pattern.quote(".")).length);
+			System.out.println(file.getName());
+			if (file != null&&file.getOriginalFilename().split(Pattern.quote(".")).length>1) {
+				
+				System.out.println("file name:-"+file.getName());
+				System.out.println(file.toString());
 				File tFile = multipartToFile(file);
 
 				String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
@@ -179,7 +185,7 @@ public class HomeController {
 
 		Page<CrewDetails> page = crewrepo.findAll(pageable);
 		model.addAttribute("page", page);
-		return "redirect:/crewmaster";
+		return "redirect:/crewmaster"; 
 	}
 
 	@RequestMapping("/flightmaster")
@@ -195,6 +201,11 @@ public class HomeController {
 	@RequestMapping("/tripmaster")
 	public String tripmaster() {
 		return ("tripmaster");
+	}
+	
+	@RequestMapping("/triphistory")
+	public String triphistory() {
+		return ("triphistory");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.example.crew.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,10 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.example.crew.model.CrewDetails;
 import com.example.crew.model.RouteDetails;
 import com.example.crew.repo.RouteDetailsRepo;
 
@@ -46,12 +44,15 @@ public class RouteDetailsController {
 			final RedirectAttributes redirectAttributes) {
 		if (route != null) {
 			
-			routedetailsrepo.save(route);
+			routedetailsrepo.save(route); 
 		}
 		Page<RouteDetails> page = routedetailsrepo.findAll(pageable);
 		model.addAttribute("page", page);
 		return "routemaster";
 	}
+	
+	
+	 
 	
 }
 
